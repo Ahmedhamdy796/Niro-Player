@@ -10,9 +10,11 @@ export interface VideoControlsProps {
   isPlaying: boolean;
   currentTime: number;
   duration: number;
+  bufferedEnd: number;
   volume: number;
   isMuted: boolean;
   isFullscreen: boolean;
+  videoElement: HTMLVideoElement | null;
   onPlayPause: () => void;
   onSeek: (time: number) => void;
   onVolumeChange: (volume: number) => void;
@@ -28,6 +30,7 @@ export interface VideoState {
   isPlaying: boolean;
   currentTime: number;
   duration: number;
+  bufferedEnd: number;
   volume: number;
   isMuted: boolean;
   isFullscreen: boolean;

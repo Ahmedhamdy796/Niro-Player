@@ -8,16 +8,24 @@ export const detectVideoType = (url: string, type: VideoType = 'auto'): 'hls' | 
 };
 
 export const formatTime = (time: number): string => {
-  if (isNaN(time)) return '0:00';
+  if (isNaN(time) || time < 0) return '0:00';
 
-  const hours = Math.floor(time / 3600);
-  const minutes = Math.floor((time % 3600) / 60);
-  const seconds = Math.floor(time % 60);
+  const totalSeconds = Math.floor(time);
+  const hours = Math.floor(totalSeconds / 3600);
+  const minutes = Math.floor((totalSeconds % 3600) / 60);
+  const seconds = totalSeconds % 60;
 
-  if (hours > 0) {
+  // For videos longer than 60 minutes, use HH:MM:SS format
+  if (totalSeconds >= 3600) {
     return `${hours}:${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
   }
-  return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+
+  // For shorter videos, use MM:SS format
+  // Don't pad minutes with leading zero if it's 0
+  const minutesStr = hours > 0 ? minutes.toString().padStart(2, '0') : minutes.toString();
+  const secondsStr = seconds.toString().padStart(2, '0');
+
+  return `${minutesStr}:${secondsStr}`;
 };
 
 export const initializeHlsPlayer = (

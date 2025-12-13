@@ -22,6 +22,7 @@ export default function VideoPlayer({
     isPlaying: false,
     currentTime: 0,
     duration: 0,
+    bufferedEnd: 0,
     volume: 1,
     isMuted: false,
     isFullscreen: false,
@@ -68,7 +69,14 @@ export default function VideoPlayer({
     const video = videoRef.current;
     if (!video) return;
 
-    const handleTimeUpdate = () => setState(prev => ({ ...prev, currentTime: video.currentTime }));
+    const handleTimeUpdate = () => {
+      const bufferedEnd = video.buffered.length > 0 ? video.buffered.end(video.buffered.length - 1) : 0;
+      setState(prev => ({
+        ...prev,
+        currentTime: video.currentTime,
+        bufferedEnd
+      }));
+    };
     const handleDurationChange = () => setState(prev => ({ ...prev, duration: video.duration }));
     const handlePlay = () => setState(prev => ({ ...prev, isPlaying: true }));
     const handlePause = () => setState(prev => ({ ...prev, isPlaying: false }));
@@ -83,6 +91,7 @@ export default function VideoPlayer({
     video.addEventListener('play', handlePlay);
     video.addEventListener('pause', handlePause);
     video.addEventListener('volumechange', handleVolumeChange);
+    video.addEventListener('progress', handleTimeUpdate); // Update buffered end on progress events
 
     return () => {
       video.removeEventListener('timeupdate', handleTimeUpdate);
@@ -105,19 +114,7 @@ export default function VideoPlayer({
     };
   }, []);
 
-  // Auto-hide controls
-  const resetHideControlsTimer = () => {
-    if (hideControlsTimeout.current) {
-      clearTimeout(hideControlsTimeout.current);
-    }
-    setState(prev => ({ ...prev, showControls: true }));
-
-    if (state.isPlaying) {
-      hideControlsTimeout.current = setTimeout(() => {
-        setState(prev => ({ ...prev, showControls: false }));
-      }, 3000);
-    }
-  };
+  // Controls are always visible - no auto-hide functionality
 
   // Control functions
   const togglePlay = () => {
@@ -240,8 +237,6 @@ export default function VideoPlayer({
   return (
     <div
       className={`relative bg-black overflow-hidden ${className}`}
-      onMouseMove={resetHideControlsTimer}
-      onMouseLeave={() => state.isPlaying && setState(prev => ({ ...prev, showControls: false }))}
     >
       <video
         ref={videoRef}
@@ -260,68 +255,68 @@ export default function VideoPlayer({
         </div>
       )}
 
-      {/* Server/Video Switcher Icon - Top Left */}
-      <div className="absolute top-4 left-4 z-20">
+      {/* Server/Video Switcher Icon - Top Left Corner */}
+      <div className="absolute top-2 left-2 z-20">
         <button
           onClick={() => setShowVideoMenu(!showVideoMenu)}
-          className="bg-black/60 hover:bg-black/80 text-white p-2 rounded-lg backdrop-blur-sm transition-all hover:scale-105"
+          className="bg-black/60 hover:bg-black/80 text-white p-1.5 rounded-lg backdrop-blur-sm transition-all hover:scale-105 cursor-pointer"
           aria-label="Video options"
         >
-          <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36" viewBox="0 0 24 24">
             <path fill="currentColor" d="M6.5 20q-2.275 0-3.887-1.575T1 14.575q0-1.95 1.175-3.475T5.25 9.15q.625-2.3 2.5-3.725T12 4q2.925 0 4.963 2.038T19 11q1.725.2 2.863 1.488T23 15.5q0 1.875-1.312 3.188T18.5 20zm0-2h12q1.05 0 1.775-.725T21 15.5t-.725-1.775T18.5 13H17v-2q0-2.075-1.463-3.538T12 6T8.463 7.463T7 11h-.5q-1.45 0-2.475 1.025T3 14.5t1.025 2.475T6.5 18m5.5-6"/>
           </svg>
         </button>
 
         {/* Video Options Menu */}
         {showVideoMenu && (
-          <div className="absolute top-12 left-0 bg-black/90 backdrop-blur-sm rounded-lg p-2 min-w-48 border border-gray-700">
-            {sampleVideos.map((video, index) => (
-              <button
-                key={index}
-                onClick={() => {
-                  if (onVideoChange) {
-                    onVideoChange(video.url);
-                    setShowVideoMenu(false);
-                  }
-                }}
-                className="w-full text-left px-3 py-2 text-white hover:bg-white/10 rounded transition-colors flex items-center gap-2"
-              >
-                <div className={`w-2 h-2 rounded-full ${
-                  video.type === 'hls' ? 'bg-blue-500' : 'bg-green-500'
-                }`} />
-                <div>
-                  <div className="text-sm font-medium">{video.name}</div>
-                  <div className="text-xs text-gray-400">{video.type.toUpperCase()}</div>
+          <div className="absolute top-12 left-0 bg-[#0c1216] backdrop-blur-xl rounded-2xl border border-gray-700/50 shadow-2xl animate-in slide-in-from-bottom-2 duration-300 min-w-[250px] max-w-sm overflow-hidden z-50">
+            <div className="max-h-[80vh] overflow-y-auto custom-scrollbar">
+              <div className="p-4 pt-6">
+                {/* Header */}
+                <div className="mb-4 px-2">
+                  <h3 className="text-white font-semibold text-base">Video Sources</h3>
+                  <div className="h-px bg-gray-700/30 mt-2"></div>
                 </div>
-              </button>
-            ))}
+                <div className="space-y-1">
+                  {sampleVideos.map((video, index) => (
+                    <button
+                      key={index}
+                      onClick={() => {
+                        if (onVideoChange) {
+                          onVideoChange(video.url);
+                          setShowVideoMenu(false);
+                        }
+                      }}
+                      className="w-full text-left px-2 py-2.5 text-white hover:bg-white/5 rounded-lg transition-colors flex items-center gap-2 cursor-pointer"
+                    >
+                      <div className={`w-2 h-2 rounded-full ${
+                        video.type === 'hls' ? 'bg-blue-500' : 'bg-green-500'
+                      }`} />
+                      <div>
+                        <div className="text-sm font-medium">{video.name}</div>
+                        <div className="text-xs text-gray-400">{video.type.toUpperCase()}</div>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            </div>
           </div>
         )}
       </div>
 
-      {/* Controls Overlay */}
-      <div
-        className={`absolute bottom-0 left-0 right-0 transition-opacity duration-300 ${
-          state.showControls ? 'opacity-100' : 'opacity-0'
-        }`}
-        onMouseEnter={() => setState(prev => ({ ...prev, showControls: true }))}
-        onMouseLeave={() => {
-          if (state.isPlaying) {
-            // Only auto-hide if video is playing
-            hideControlsTimeout.current = setTimeout(() => {
-              setState(prev => ({ ...prev, showControls: false }));
-            }, 3000);
-          }
-        }}
-      >
+      {/* Controls Overlay - Always Visible */}
+      <div className="absolute bottom-0 left-0 right-0">
         <VideoControls
           ref={controlsRef}
           isPlaying={state.isPlaying}
           currentTime={state.currentTime}
           duration={state.duration}
+          bufferedEnd={state.bufferedEnd}
           volume={state.volume}
           isMuted={state.isMuted}
           isFullscreen={state.isFullscreen}
+          videoElement={videoRef.current}
           onPlayPause={togglePlay}
           onSeek={handleSeek}
           onVolumeChange={handleVolumeChange}
@@ -334,19 +329,7 @@ export default function VideoPlayer({
         />
       </div>
 
-      {/* Play button overlay when paused */}
-      {!state.isPlaying && !state.error && (
-        <div
-          className="absolute inset-0 flex items-center justify-center cursor-pointer"
-          onClick={togglePlay}
-        >
-          <div className="bg-black/50 rounded-full p-6 hover:bg-black/70 transition-colors">
-            <svg className="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 24 24">
-              <path d="M8 5v14l11-7z"/>
-            </svg>
-          </div>
-        </div>
-      )}
+
     </div>
   );
 }
