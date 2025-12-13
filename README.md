@@ -2,6 +2,10 @@
 
 A modern, feature-rich video player built with Next.js, TypeScript, and HLS.js. This player provides a professional streaming experience with comprehensive controls and customizable options.
 
+## 📸 Demo
+
+![Niro Player Demo](public/demo.png)
+
 ## ✨ Features
 
 ### 🎮 **Core Functionality**
